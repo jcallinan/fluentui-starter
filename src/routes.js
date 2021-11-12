@@ -20,18 +20,23 @@ const routes = {
       isHidden: true,
     },
     {
-      key: "order",
+      key: "Cash and Invoices",
       name: "Order",
       icon: "visualizeApp",
       children: [
         {
           key: "purchase-order",
-          name: "Purchase Order",
+          name: "Cash Receipts Entry/Post",
+          component: React.lazy(() => import("./pages/PurchaseOrder")),
+        },
+        {
+          key: "purchase-order2",
+          name: "Wash Prepay Cash w/ Open Invoices",
           component: React.lazy(() => import("./pages/PurchaseOrder")),
         },
         {
           key: "sales-order",
-          name: "Sales Order",
+          name: "Invoice/Adjustment Entry/Post",
         },
       ],
     },
@@ -42,17 +47,17 @@ const routes = {
       children: [
         {
           key: "organization",
-          name: "Organization",
+          name: "EFT Workfile",
           icon: "Org",
         },
         {
           key: "user",
-          name: "User",
+          name: "PNC EFT File Management",
           icon: "People",
         },
         {
           key: "authority",
-          name: "Authority",
+          name: "Monthly Statments",
           icon: "SecurityGroup",
         },
         {
@@ -62,11 +67,11 @@ const routes = {
           children: [
             {
               key: "list",
-              name: "List",
+              name: "Credit",
             },
             {
               key: "unit",
-              name: "Unit",
+              name: "Authorize",
             },
           ],
         },
