@@ -7,8 +7,26 @@ import {
   SelectionMode,
   mergeStyleSets,
   TooltipHost,
-  CheckboxVisibility,
+  CheckboxVisibility,DefaultButton, IButtonProps, TeachingBubble, Fabric, initializeIcons
 } from '@fluentui/react';
+import { useBoolean } from '@uifabric/react-hooks';
+
+const toggleTeachingBubbleVisible = false;
+const teachingBubbleVisible = false;
+const examplePrimaryButtonProps = {
+  children: "Try it out"
+};
+
+const TeachingBubbleBasicExample = () => {
+  const [teachingBubbleVisible, { toggle: toggleTeachingBubbleVisible }] = useBoolean(false);
+  const exampleSecondaryButtonProps = React.useMemo(() => ({
+      children: "Maybe later",
+      onClick: toggleTeachingBubbleVisible
+  }), [toggleTeachingBubbleVisible]);
+  return (React.createElement("div", null,
+      React.createElement(DefaultButton, { id: "targetButton", onClick: toggleTeachingBubbleVisible, text: teachingBubbleVisible ? "Hide TeachingBubble" : "Show TeachingBubble" }),
+      teachingBubbleVisible && (React.createElement(TeachingBubble, { target: "#targetButton", primaryButtonProps: examplePrimaryButtonProps, secondaryButtonProps: exampleSecondaryButtonProps, onDismiss: toggleTeachingBubbleVisible, headline: "Learn more about purchases" }, "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, nulla, ipsum? Molestiae quis aliquam magni harum non?"))));
+};
 
 const columns = [
   {
@@ -92,7 +110,8 @@ function DataList(props) {
 
   return (
     <div>
-      <h1 className={classNames.header}>Purchase List</h1>
+      <h1 className={classNames.header}>Invoice List</h1>
+      <TeachingBubbleBasicExample   />
       <DetailsList
         styles={gridStyles}
         items={items}
@@ -106,7 +125,11 @@ function DataList(props) {
         ariaLabelForSelectionColumn="Toggle selection"
         ariaLabelForSelectAllCheckbox="Toggle selection for all items"
       />{' '}
+
+
+    
     </div>
+    
   );
 }
 
